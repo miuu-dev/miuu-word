@@ -1,0 +1,943 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #121212;
+  color: #e5e5e5;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.word-app {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Barra superior */
+.doc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background: #181818;
+  border-bottom: 1px solid #2a2a2a;
+  flex-shrink: 0;
+}
+
+.doc-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.app-badge {
+  background: #793bf6;
+  color: white;
+  font-weight: bold;
+  padding: 6px 11px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+.title-input {
+  background: transparent;
+  border: 1px solid transparent;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+  width: 260px;
+}
+
+.title-input:hover,
+.title-input:focus {
+  border-color: #3a3a3a;
+  background: #202020;
+  outline: none;
+}
+
+.file-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.lang-select {
+  background: #262626;
+  color: #e5e5e5;
+  border: 1px solid #3a3a3a;
+  padding: 5px 8px;
+  border-radius: 4px;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+button {
+  background: #262626;
+  color: #e5e5e5;
+  border: 1px solid #333;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background 0.15s ease;
+}
+
+button:hover {
+  background: #333;
+}
+
+button.active {
+  background: #793bf6;
+  border-color: #793bf6;
+  color: white;
+}
+
+.btn-primary {
+  background: #793bf6;
+  border-color: #793bf6;
+  color: white;
+  font-weight: 500;
+}
+
+.btn-primary:hover {
+  background: #672de0;
+}
+
+/* Cinta de opciones estilo Word */
+.ribbon {
+  display: flex;
+  align-items: stretch;
+  gap: 2px;
+  padding: 6px 14px;
+  background: #1c1c1c;
+  border-bottom: 1px solid #2e2e2e;
+  overflow-x: auto;
+  flex-shrink: 0;
+}
+
+.ribbon-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 4px 12px;
+  border-right: 1px solid #2e2e2e;
+  gap: 6px;
+}
+
+.ribbon-row,
+.ribbon-controls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.group-label {
+  font-size: 0.68rem;
+  color: #888;
+  text-align: center;
+  letter-spacing: 0.3px;
+}
+
+.btn-tall {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  height: 54px;
+  font-size: 0.72rem;
+  gap: 3px;
+}
+
+.icon-lg {
+  font-size: 1.15rem;
+}
+
+.font-select {
+  width: 145px;
+  background: #262626;
+  color: #e5e5e5;
+  border: 1px solid #383838;
+  padding: 4px 6px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.size-select {
+  width: 56px;
+  background: #262626;
+  color: #e5e5e5;
+  border: 1px solid #383838;
+  padding: 4px 6px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.color-picker {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: #262626;
+  border: 1px solid #333;
+  padding: 3px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.color-picker input[type="color"] {
+  width: 15px;
+  height: 15px;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* Apartado Párrafo y Tablas estructurado */
+.paragraph-grid {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sub-cluster {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: #222222;
+  padding: 4px;
+  border-radius: 6px;
+  border: 1px solid #2f2f2f;
+}
+
+.sub-cluster:not(.table-cluster) {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.table-cluster {
+  padding: 4px 6px;
+}
+
+.btn-table-insert {
+  width: 100%;
+  font-size: 0.75rem;
+  padding: 3px 8px;
+  background: #2b2638;
+  border-color: #463869;
+  color: #d8c7ff;
+}
+
+.btn-table-insert:hover {
+  background: #3a3052;
+}
+
+.table-mini-actions {
+  display: flex;
+  gap: 3px;
+}
+
+.table-mini-actions button {
+  padding: 2px 5px;
+  font-size: 0.7rem;
+}
+
+.table-mini-actions button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.btn-danger:not(:disabled):hover {
+  background: #7a2626;
+  border-color: #a33;
+}
+
+/* Galería de estilos rápidos */
+.styles-gallery {
+  display: flex;
+  gap: 6px;
+  background: #161616;
+  padding: 4px;
+  border-radius: 6px;
+  border: 1px solid #2b2b2b;
+}
+
+.style-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background: #232323;
+  border: 1px solid #353535;
+  padding: 5px 8px;
+  min-width: 68px;
+  height: 52px;
+}
+
+.style-card small {
+  font-size: 0.65rem;
+  color: #aaa;
+}
+
+.preview-normal { font-size: 0.8rem; color: #e5e5e5; }
+.preview-h1 { font-size: 0.78rem; font-weight: bold; background: #9b7be8; color: #fff; padding: 1px 5px; border-radius: 2px; }
+.preview-h2 { font-size: 0.78rem; font-weight: bold; color: #cbb6f8; border-bottom: 1px solid #793bf6; }
+.preview-h3 { font-size: 0.76rem; color: #a892e6; border-top: 1px solid #793bf6; }
+.preview-h4 { font-size: 0.76rem; font-style: italic; color: #c4b5fd; }
+.preview-quote { font-size: 0.75rem; font-style: italic; color: #9ca3af; }
+
+.preview-php {
+  font-family: 'JetBrains Mono', 'Consolas', monospace;
+  font-size: 0.74rem;
+  font-weight: bold;
+  color: #a5b4fc;
+}
+
+.preview-python {
+  font-family: 'JetBrains Mono', 'Consolas', monospace;
+  font-size: 0.74rem;
+  font-weight: bold;
+  color: #fde047;
+}
+
+.preview-html {
+  font-family: 'JetBrains Mono', 'Consolas', monospace;
+  font-size: 0.74rem;
+  font-weight: bold;
+  color: #fb923c;
+}
+
+.preview-css {
+  font-family: 'JetBrains Mono', 'Consolas', monospace;
+  font-size: 0.74rem;
+  font-weight: bold;
+  color: #38bdf8;
+}
+
+.preview-js {
+  font-family: 'JetBrains Mono', 'Consolas', monospace;
+  font-size: 0.74rem;
+  font-weight: bold;
+  color: #facc15;
+}
+
+.preview-md {
+  font-family: 'JetBrains Mono', 'Consolas', monospace;
+  font-size: 0.74rem;
+  font-weight: bold;
+  color: #c084fc;
+}
+
+/* Lienzo de trabajo y Folio A4 */
+.workspace {
+  flex: 1;
+  overflow-y: auto;
+  padding: 32px 16px;
+  display: flex;
+  justify-content: center;
+  background: #121212;
+}
+
+.page-a4 {
+  width: 210mm;
+  min-height: 297mm;
+  height: fit-content;
+  background: #ffffff;
+  color: #111111;
+  padding: 25mm;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.55);
+  line-height: 1.6;
+  text-align: left;
+}
+
+/* Área editable interna de TipTap */
+.ProseMirror {
+  outline: none;
+  min-height: 240mm;
+  white-space: pre-wrap;
+  text-align: left;
+}
+
+.ProseMirror h1 { font-size: 2rem; color: #4c1d95; margin: 0.6em 0 0.4em; }
+.ProseMirror h2 { font-size: 1.5rem; color: #5b21b6; border-bottom: 1px solid #ddd6fe; padding-bottom: 4px; }
+.ProseMirror h3 { font-size: 1.25rem; color: #6d28d9; }
+.ProseMirror h4 { font-size: 1.1rem; font-style: italic; color: #4b5563; }
+
+.ProseMirror p {
+  margin: 0 0 0.8em 0;
+}
+
+.ProseMirror ul,
+.ProseMirror ol {
+  padding-left: 1.5rem;
+  margin: 0.5em 0 1em 0;
+}
+
+.ProseMirror blockquote {
+  border-left: 4px solid #793bf6;
+  padding-left: 14px;
+  margin-left: 0;
+  color: #4b5563;
+  font-style: italic;
+  background: #faf5ff;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+/* Base común para todos los bloques de código con JetBrains Mono */
+.ProseMirror pre {
+  position: relative;
+  background: #1e1e1e;
+  color: #e4e4e7;
+  padding: 30px 16px 14px 16px;
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 0.85rem;
+  font-variant-ligatures: contextual;
+  line-height: 1.6;
+  margin: 1rem 0;
+  text-align: left !important;
+  direction: ltr;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+  overflow-x: hidden;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+}
+
+.ProseMirror pre code {
+  display: block;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  text-align: left !important;
+  white-space: pre-wrap;
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   1. PHP (Índigo / Violeta)
+   ========================================================= */
+.ProseMirror pre:has(code.language-php) {
+  background: #1b1a24;
+  border-left: 5px solid #777bb4;
+}
+
+.ProseMirror pre:has(code.language-php)::before {
+  content: 'PHP';
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  background: #777bb4;
+  color: #ffffff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.6px;
+}
+
+.ProseMirror pre:has(code.language-php) .hljs-variable { color: #e5c07b; }
+.ProseMirror pre:has(code.language-php) .hljs-keyword { color: #c678dd; font-weight: bold; }
+.ProseMirror pre:has(code.language-php) .hljs-title { color: #61afef; }
+.ProseMirror pre:has(code.language-php) .hljs-string { color: #98c379; }
+
+/* =========================================================
+   2. PYTHON (Azul / Amarillo)
+   ========================================================= */
+.ProseMirror pre:has(code.language-python) {
+  background: #181d24;
+  border-left: 5px solid #ffd43b;
+}
+
+.ProseMirror pre:has(code.language-python)::before {
+  content: 'PYTHON';
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  background: #306998;
+  color: #ffd43b;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.6px;
+}
+
+.ProseMirror pre:has(code.language-python) .hljs-keyword { color: #ff79c6; font-weight: bold; }
+.ProseMirror pre:has(code.language-python) .hljs-title { color: #50fa7b; }
+.ProseMirror pre:has(code.language-python) .hljs-string { color: #f1fa8c; }
+.ProseMirror pre:has(code.language-python) .hljs-built_in { color: #8be9fd; }
+
+/* =========================================================
+   3. HTML (Naranja / Coral)
+   ========================================================= */
+.ProseMirror pre:has(code.language-html) {
+  background: #211a18;
+  border-left: 5px solid #e34c26;
+}
+
+.ProseMirror pre:has(code.language-html)::before {
+  content: 'HTML5';
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  background: #e34c26;
+  color: #ffffff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.6px;
+}
+
+.ProseMirror pre:has(code.language-html) .hljs-tag,
+.ProseMirror pre:has(code.language-html) .hljs-name { color: #f06529; font-weight: bold; }
+.ProseMirror pre:has(code.language-html) .hljs-attr { color: #ffd166; }
+.ProseMirror pre:has(code.language-html) .hljs-string { color: #a8e6cf; }
+
+/* =========================================================
+   4. CSS (Azul Cian)
+   ========================================================= */
+.ProseMirror pre:has(code.language-css) {
+  background: #171e26;
+  border-left: 5px solid #2965f1;
+}
+
+.ProseMirror pre:has(code.language-css)::before {
+  content: 'CSS3';
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  background: #2965f1;
+  color: #ffffff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.6px;
+}
+
+.ProseMirror pre:has(code.language-css) .hljs-selector-class,
+.ProseMirror pre:has(code.language-css) .hljs-selector-id,
+.ProseMirror pre:has(code.language-css) .hljs-selector-tag { color: #38bdf8; font-weight: bold; }
+.ProseMirror pre:has(code.language-css) .hljs-attribute { color: #93c5fd; }
+.ProseMirror pre:has(code.language-css) .hljs-number,
+.ProseMirror pre:has(code.language-css) .hljs-string { color: #f472b6; }
+
+/* =========================================================
+   5. JAVASCRIPT (Amarillo Dorado)
+   ========================================================= */
+.ProseMirror pre:has(code.language-javascript) {
+  background: #201f18;
+  border-left: 5px solid #f7df1e;
+}
+
+.ProseMirror pre:has(code.language-javascript)::before {
+  content: 'JAVASCRIPT';
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  background: #f7df1e;
+  color: #18181b;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.6px;
+}
+
+.ProseMirror pre:has(code.language-javascript) .hljs-keyword { color: #facc15; font-weight: bold; }
+.ProseMirror pre:has(code.language-javascript) .hljs-title { color: #60a5fa; }
+.ProseMirror pre:has(code.language-javascript) .hljs-string { color: #4ade80; }
+.ProseMirror pre:has(code.language-javascript) .hljs-number { color: #fb923c; }
+
+/* =========================================================
+   6. MARKDOWN (Púrpura / Lavanda)
+   ========================================================= */
+.ProseMirror pre:has(code.language-markdown) {
+  background: #1e1926;
+  border-left: 5px solid #a855f7;
+}
+
+.ProseMirror pre:has(code.language-markdown)::before {
+  content: 'MARKDOWN';
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  background: #793bf6;
+  color: #ffffff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.6px;
+}
+
+.ProseMirror pre:has(code.language-markdown) .hljs-section { color: #c084fc; font-weight: bold; }
+.ProseMirror pre:has(code.language-markdown) .hljs-strong { color: #f472b6; font-weight: bold; }
+.ProseMirror pre:has(code.language-markdown) .hljs-emphasis { color: #38bdf8; font-style: italic; }
+.ProseMirror pre:has(code.language-markdown) .hljs-link,
+.ProseMirror pre:has(code.language-markdown) .hljs-code { color: #34d399; }
+
+/* Comentarios y literales comunes */
+.hljs-comment {
+  color: #6b7280;
+  font-style: italic;
+}
+
+.hljs-literal,
+.hljs-meta {
+  color: #f472b6;
+}
+
+/* Estilos para tablas dentro de la hoja A4 */
+.ProseMirror table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+  table-layout: fixed;
+}
+
+.ProseMirror td,
+.ProseMirror th {
+  border: 1px solid #888888;
+  padding: 6px 10px;
+  vertical-align: top;
+  min-width: 50px;
+}
+
+.ProseMirror th {
+  background-color: #f0ebf8;
+  font-weight: bold;
+  text-align: left;
+}
+
+/* Barra de estado inferior */
+.statusbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 20px;
+  background: #181818;
+  border-top: 1px solid #2a2a2a;
+  font-size: 0.75rem;
+  color: #888888;
+  flex-shrink: 0;
+}
+
+/* Contenedor y desplegable personalizado de color */
+.color-popover-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.color-trigger-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #262626;
+  border: 1px solid #383838;
+  color: #e5e5e5;
+  padding: 3px 7px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.color-trigger-btn:hover {
+  background: #333333;
+}
+
+.color-swatch-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  display: inline-block;
+}
+
+.color-popover {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 999;
+  width: 215px;
+  background: #1f1f24;
+  border: 1px solid #3a3548;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.65);
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.popover-top-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.popover-visual-picker {
+  width: 34px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.popover-hex-input {
+  flex: 1;
+  background: #141418;
+  color: #f4f4f5;
+  border: 1px solid #383842;
+  border-radius: 4px;
+  padding: 5px 7px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+}
+
+.popover-hex-input:focus {
+  outline: none;
+  border-color: #793bf6;
+}
+
+.quick-colors-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.quick-color-btn {
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: transform 0.12s ease, border-color 0.12s ease;
+}
+
+.quick-color-btn:hover {
+  transform: scale(1.15);
+  border-color: #ffffff;
+}
+
+.popover-clear-btn {
+  width: 100%;
+  background: #2a2635;
+  border: 1px solid #3f3852;
+  color: #ddd6fe;
+  font-size: 0.72rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.popover-clear-btn:hover {
+  background: #38314a;
+}
+
+/* =========================================================
+   Selector de color manual (ColorPicker)
+   ========================================================= */
+/* fixed: se superpone a toda la interfaz sin quedar recortado por la cinta */
+.color-popover {
+  position: fixed;
+  z-index: 9999;
+  width: 240px;
+  padding: 12px;
+}
+
+.cp-root {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Área de saturación / brillo */
+.cp-area {
+  position: relative;
+  width: 100%;
+  height: 150px;
+  border-radius: 6px;
+  cursor: crosshair;
+  touch-action: none;
+  user-select: none;
+  overflow: hidden;
+}
+
+.cp-area-white,
+.cp-area-black {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.cp-area-white {
+  background: linear-gradient(to right, #ffffff, rgba(255, 255, 255, 0));
+}
+
+.cp-area-black {
+  background: linear-gradient(to top, #000000, rgba(0, 0, 0, 0));
+}
+
+.cp-handle {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(0, 0, 0, 0.3);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+/* Barra de tono */
+.cp-hue {
+  position: relative;
+  width: 100%;
+  height: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  touch-action: none;
+  user-select: none;
+  background: linear-gradient(
+    to right,
+    #ff0000 0%,
+    #ffff00 17%,
+    #00ff00 33%,
+    #00ffff 50%,
+    #0000ff 67%,
+    #ff00ff 83%,
+    #ff0000 100%
+  );
+}
+
+.cp-hue-handle {
+  position: absolute;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+/* Fila hexadecimal (debajo del selector) */
+.cp-hex-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid #33303f;
+}
+
+.cp-preview {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.cp-hex-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #9d93b8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.cp-hex-input {
+  flex: 1;
+  min-width: 0;
+  background: #141418;
+  color: #f4f4f5;
+  border: 1px solid #383842;
+  border-radius: 4px;
+  padding: 6px 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+}
+
+.cp-hex-input:focus {
+  outline: none;
+  border-color: #793bf6;
+}
+
+/* Colores rápidos */
+.cp-quick {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cp-section-label {
+  font-size: 0.68rem;
+  color: #888;
+  letter-spacing: 0.3px;
+}
+
+.cp-quick-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cp-quick-btn {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: transform 0.12s ease, border-color 0.12s ease;
+}
+
+.cp-quick-btn:hover {
+  transform: scale(1.12);
+  border-color: #ffffff;
+}
+
+.cp-quick-btn.selected {
+  border-color: #ffffff;
+  box-shadow: 0 0 0 2px #793bf6;
+}
+
+/* Reglas de impresión limpia para Exportar PDF */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body,
+  .word-app,
+  .workspace {
+    background: #ffffff !important;
+    height: auto !important;
+    overflow: visible !important;
+    padding: 0 !important;
+  }
+
+  .page-a4 {
+    box-shadow: none !important;
+    width: 100% !important;
+    min-height: auto !important;
+    padding: 0 !important;
+  }
+}
