@@ -13,8 +13,8 @@
     "electron:build": "npm run build && electron-builder --win portable"
   },
   "build": {
-    "appId": "com.miuu.wordcraft",
-    "productName": "WordCraft",
+    "appId": "com.miuu.word",
+    "productName": "MDocs",
     "files": [
       "dist/**/*",
       "main.js",
