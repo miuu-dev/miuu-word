@@ -1,6 +1,6 @@
 <div align="center">
 
-# 📝 WordCraft
+# 📝 MDocs
 
 **Un procesador de textos ligero de escritorio, con cinta de opciones estilo Word.**
 
@@ -9,6 +9,8 @@
 ![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)
 ![TipTap](https://img.shields.io/badge/TipTap-3-793BF6)
 ![Platform](https://img.shields.io/badge/Windows-0078D6?logo=windows&logoColor=white)
+
+**Español** | [English](README.en.md)
 
 </div>
 
@@ -29,19 +31,14 @@
 - **Interfaz en español e inglés**, con cambio al instante.
 - Contador de palabras en la barra de estado.
 
-<!--
-Captura de pantalla: sube una imagen a la carpeta del repo y descomenta la línea de abajo.
-![WordCraft](docs/screenshot.png)
--->
-
 ---
 
 ## 📥 Instalación (usuarios)
 
 1. Ve a la sección **[Releases](../../releases)** de este repositorio.
 2. Descarga la versión que prefieras:
-   - **`WordCraft Setup x.y.z.exe`**: instalador.
-   - **`WordCraft x.y.z.exe`**: versión portable, no necesita instalación.
+   - **`MDocs Setup x.y.z.exe`**: instalador.
+   - **`MDocs x.y.z.exe`**: versión portable, no necesita instalación.
 3. Ejecútalo.
 
 > **Nota:** Windows puede mostrar el aviso *"Windows protegió su equipo"*, porque el instalador no está firmado digitalmente. Pulsa **Más información → Ejecutar de todas formas**.
@@ -128,6 +125,12 @@ Los archivos resultantes quedan en la carpeta `release/`.
 ## 🤝 Contribuir
 
 ¿Has encontrado un fallo o tienes una idea? Abre un [issue](../../issues) o envía un pull request.
+
+---
+
+## 🌱 Sobre este proyecto
+
+MDocs es un proyecto personal que quise realizar por mi cuenta. Soy consciente de que todavía le quedan muchas cosas por mejorar, pero estoy empezando a aprender y cada paso de este proyecto me ha enseñado algo nuevo. Cualquier sugerencia o consejo será bienvenido.
 
 ---
 
