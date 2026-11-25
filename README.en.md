@@ -1,5 +1,5 @@
 <div align="center">
-# 📝 MDocs
+<h1>📝 MDocs</h1>
 
 **A lightweight desktop word processor with a Word-inspired ribbon interface.**
 
