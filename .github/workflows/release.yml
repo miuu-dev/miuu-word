@@ -10,8 +10,22 @@ permissions:
   contents: write
 
 jobs:
-  release:
-    runs-on: windows-latest
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            platform: --win nsis
+            artifact: windows
+            files: release/*.exe
+
+          - os: ubuntu-latest
+            platform: --linux AppImage
+            artifact: linux
+            files: release/*.AppImage
+
+    runs-on: ${{ matrix.os }}
 
     steps:
       - name: Checkout repository
@@ -26,11 +40,31 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build MDocs
-        run: npm run electron:build
+      - name: Build application
+        run: npx electron-builder ${{ matrix.platform }} --publish never
+
+      - name: Upload installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: mdocs-${{ matrix.artifact }}
+          path: ${{ matrix.files }}
+          if-no-files-found: error
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download installers
+        uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
 
       - name: Publish GitHub Release
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create ${{ github.ref_name }} release/*.exe --title "MDocs ${{ github.ref_name }}" --generate-notes
+          gh release create "$GITHUB_REF_NAME" dist/* \
+            --title "MDocs $GITHUB_REF_NAME" \
+            --generate-notes
