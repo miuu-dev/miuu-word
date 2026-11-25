@@ -9,6 +9,7 @@
 ![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)
 ![TipTap](https://img.shields.io/badge/TipTap-3-793BF6)
 ![Platform](https://img.shields.io/badge/Windows-0078D6?logo=windows&logoColor=white)
+![Linux](https://img.shields.io/badge/Linux-FCC624?logo=linux&logoColor=black)
 
 **Español** | [English](README.en.md)
 
@@ -35,14 +36,32 @@
 
 ## 📥 Instalación (usuarios)
 
-1. Ve a la sección **[Releases](../../releases)** de este repositorio.
-2. Descarga la versión que prefieras:
-   - **`MDocs Setup x.y.z.exe`**: instalador.
-   - **`MDocs x.y.z.exe`**: versión portable, no necesita instalación.
-3. Ejecútalo.
+Descarga la última versión de MDocs desde **[GitHub Releases](https://github.com/miuu-dev/miuu-word/releases/latest)**.
+
+### Windows
+
+1. Descarga `MDocs Setup x.y.z.exe` para instalar la aplicación.
+2. También puedes descargar `MDocs x.y.z.exe` si prefieres la versión portable.
+3. Ejecuta el archivo descargado.
 
 > **Nota:** Windows puede mostrar el aviso *"Windows protegió su equipo"*, porque el instalador no está firmado digitalmente. Pulsa **Más información → Ejecutar de todas formas**.
 
+### Linux
+
+1. Descarga `MDocs-x.y.z.AppImage`.
+2. Dale permisos de ejecución:
+
+   ```bash
+   chmod +x MDocs-x.y.z.AppImage
+   ```
+
+3. Ejecuta la aplicación:
+
+   ```bash
+   ./MDocs-x.y.z.AppImage
+   ```
+
+> **Nota:** Es posible que necesites instalar las dependencias de FUSE de tu distribución para ejecutar archivos AppImage.
 ---
 
 ## 🛠️ Desarrollo
