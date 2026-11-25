@@ -2,7 +2,7 @@
   "name": "miuu-word",
   "version": "0.1.0",
   "description": "Procesador de textos ligero",
-  "author": "Tu Nombre",
+  "author": "Miuu",
   "main": "main.js",
   "type": "module",
   "scripts": {
@@ -11,7 +11,9 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "electron:dev": "concurrently \"npm run dev\" \"wait-on http://localhost:5173 && electron .\"",
-    "electron:build": "npm run build && electron-builder --win"
+    "electron:build": "npm run build && electron-builder --win",
+    "electron:build:linux": "npm run build && electron-builder --linux",
+    "electron:build:all": "npm run build && electron-builder -mw"
   },
   "build": {
     "appId": "com.miuu.mdocs",
@@ -33,6 +35,13 @@
     "nsis": {
       "oneClick": false,
       "allowToChangeInstallationDirectory": true
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "Office",
+      "maintainer": "Miuu"
     }
   },
   "dependencies": {
