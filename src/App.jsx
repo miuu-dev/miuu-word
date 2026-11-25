@@ -1,4 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
+import { Pagination } from './Pagination';
+import { SplitLongCodeBlock } from './SplitLongCodeBlock';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Underline from '@tiptap/extension-underline';
@@ -126,6 +128,10 @@ export default function App() {
       TableRow,
       TableHeader,
       TableCell,
+      TableHeader,
+      TableCell,
+      Pagination,
+      SplitLongCodeBlock,
     ],
     editorProps: {
       attributes: {

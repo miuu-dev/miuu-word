@@ -356,6 +356,23 @@ button.active {
   text-align: left;
 }
 
+/* Hojas separadas */
+.page-a4 {
+  background: repeating-linear-gradient(
+    to bottom,
+    #ffffff 0,
+    #ffffff 297mm,
+    #121212 297mm,
+    #121212 calc(297mm + 12mm)
+  );
+}
+
+.page-spacer {
+  width: 100%;
+  pointer-events: none;
+  user-select: none;
+}
+
 /* Área editable interna de TipTap */
 .ProseMirror {
   outline: none;
@@ -928,7 +945,6 @@ button.active {
   body,
   .word-app,
   .workspace {
-    background: #ffffff !important;
     height: auto !important;
     overflow: visible !important;
     padding: 0 !important;
@@ -939,5 +955,13 @@ button.active {
     width: 100% !important;
     min-height: auto !important;
     padding: 0 !important;
+  }
+
+  .page-spacer {
+    display: none !important;
+  }
+
+  .ProseMirror {
+    min-height: 0 !important;
   }
 }
