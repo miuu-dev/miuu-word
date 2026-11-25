@@ -93,6 +93,25 @@ Los archivos resultantes quedan en la carpeta `release/`.
 
 ---
 
+## ⚙️ Descargar desde GitHub Actions/Acciones
+
+También puedes descargar las versiones de desarrollo generadas automáticamente mediante **GitHub Actions**, sin necesidad de esperar a una Release.
+
+1. Accede a la pestaña **[Actions](../../actions)** de este repositorio.
+2. Selecciona el último workflow de compilación completado correctamente.
+3. Comprueba que su estado sea **Success** (marca verde).
+4. Baja hasta la sección **Artifacts**, al final de la ejecución.
+5. Descarga el artefacto correspondiente:
+   - **MDocs-Setup**: instalador de Windows (`.exe`).
+   - **MDocs-Portable**: versión portable (`.exe`), no necesita instalación.
+6. Si has descargado un archivo `.zip`, extráelo y ejecuta el `.exe` correspondiente.
+
+> **Nota:** Los artefactos de GitHub Actions son temporales y pueden eliminarse automáticamente después del periodo de retención configurado en el workflow. Para obtener una versión estable y permanente, consulta la sección [Releases](../../releases).
+
+> **Importante:** Estas compilaciones pueden contener cambios recientes que todavía no se han publicado como versiones oficiales.
+
+---
+
 ## 🧱 Tecnologías
 
 | Área                  | Herramientas                                                |
